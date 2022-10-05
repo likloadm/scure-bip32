@@ -1,6 +1,6 @@
 export interface MyBindings {
     generateKeypair: (arg1: Uint8Array) => Uint8Array;
 }
-// Load it with require
-var ArlDilithium: MyBindings = require('@liklo/arl-dilithium');
+
+var ArlDilithium: MyBindings = require('arl-dilithium');
 export default ArlDilithium;
