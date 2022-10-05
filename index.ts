@@ -7,7 +7,12 @@ import { bytes as assertBytes } from '@noble/hashes/_assert';
 import { bytesToHex, concatBytes, createView, hexToBytes, utf8ToBytes } from '@noble/hashes/utils';
 import * as secp from '@noble/secp256k1';
 import { base58check as base58checker } from '@scure/base';
-import ArlDilithium from "./arldilithium";
+export interface MyBindings {
+    generateKeypair: (arg1: Uint8Array) => Uint8Array;
+}
+
+var ArlDilithium: MyBindings = require('arl-dilithium');
+export default ArlDilithium;
 
 // Enable sync API for noble-secp256k1
 secp.utils.hmacSha256Sync = (key, ...msgs) => hmac(sha256, key, secp.utils.concatBytes(...msgs));
