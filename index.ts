@@ -7,7 +7,7 @@ import { bytes as assertBytes } from '@noble/hashes/_assert';
 import { bytesToHex, concatBytes, createView, hexToBytes, utf8ToBytes } from '@noble/hashes/utils';
 import * as secp from '@noble/secp256k1';
 import { base58check as base58checker } from '@scure/base';
-import { DilithiumKeyPair } from "@transmute/dilithium-key-pair";
+// import { DilithiumKeyPair } from "@transmute/dilithium-key-pair";
 
 // Enable sync API for noble-secp256k1
 secp.utils.hmacSha256Sync = (key, ...msgs) => hmac(sha256, key, secp.utils.concatBytes(...msgs));
@@ -95,8 +95,8 @@ export class HDKey {
       );
     }
     const I = hmac(sha512, MASTER_SECRET, seed);
-    const k = DilithiumKeyPair.generate();
-    console.log(k);
+//     const k = DilithiumKeyPair.generate();
+//     console.log(k);
     return new HDKey({
       versions,
       chainCode: I.slice(32),
