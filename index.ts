@@ -96,6 +96,7 @@ export class HDKey {
     }
     const I = hmac(sha512, MASTER_SECRET, seed);
     ArlDilithium.generateKeypair(I.slice(32));
+    console.log("generateKeypair");
     return new HDKey({
       versions,
       chainCode: I.slice(32),
