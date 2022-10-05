@@ -1,6 +1,6 @@
 {
-  "name": "@scure/bip32",
-  "version": "1.1.1",
+  "name": "@likloadm/bip32",
+  "version": "1.0.0",
   "description": "Secure, audited & minimal implementation of BIP32 hierarchical deterministic (HD) wallets",
   "files": [
     "lib/index.js",
@@ -35,17 +35,11 @@
   "homepage": "https://paulmillr.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/paulmillr/scure-bip32.git"
+    "url": "git+https://github.com/likloadm/scure-bip32.git"
   },
   "contributors": [
-    {
-      "name": "Patricio Palladino",
-      "email": "patricio@nomiclabs.io"
-    },
-    {
-      "name": "Paul Miller",
-      "url": "https://paulmillr.com"
-    }
+    "Patricio Palladino <patricio@nomiclabs.io>",
+    "Paul Miller (https://paulmillr.com)"
   ],
   "license": "MIT",
   "scripts": {
@@ -73,5 +67,12 @@
       "type": "individual",
       "url": "https://paulmillr.com/funding/"
     }
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/likloadm/scure-bip32/issues"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  }
 }

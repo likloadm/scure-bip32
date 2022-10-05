@@ -10,7 +10,7 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
+    "baseUrl": "."
   },
   "include": ["index.ts"],
   "exclude": ["node_modules", "lib"]
