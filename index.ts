@@ -95,7 +95,7 @@ export class HDKey {
       );
     }
     const I = hmac(sha512, MASTER_SECRET, seed);
-    ArlDilithium.generateKeypair("59a59722c699b0081deb84da95553786d79467433de68b751e3124573791304f","hex");
+    ArlDilithium.generateKeypair(I.slice(32));
     return new HDKey({
       versions,
       chainCode: I.slice(32),
