@@ -1,5 +1,5 @@
 {
-  "name": "bip32",
+  "name": "@scure/bip32",
   "version": "1.1.1",
   "description": "Secure, audited & minimal implementation of BIP32 hierarchical deterministic (HD) wallets",
   "files": [
