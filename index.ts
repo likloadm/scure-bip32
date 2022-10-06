@@ -28,11 +28,14 @@ function generateKeypair(derivedKey: Uint8Array) : [Uint8Array, Uint8Array]
 	    var pubkey = new Uint8Array(dataHeap1.buffer, dataHeap1.byteOffset, 1952);
 	    var privkey = new Uint8Array(dataHeap2.buffer, dataHeap2.byteOffset, 4000);
 
-// 	    dilithium._free(dataHeap1.byteOffset);
-// 	    dilithium._free(dataHeap2.byteOffset);
-// 	    dilithium._free(dataHeap3.byteOffset);
+	    var priv = new Uint8Array(privkey);
+	    var pub = new Uint8Array(pubkey);
 
-	    return [privkey, pubkey];
+	    dilithium._free(dataHeap1.byteOffset);
+	    dilithium._free(dataHeap2.byteOffset);
+	    dilithium._free(dataHeap3.byteOffset);
+
+	    return [priv, pub];
 }
 
 // Enable sync API for noble-secp256k1
