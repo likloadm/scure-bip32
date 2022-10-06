@@ -4,3 +4,4 @@
 /test/*.d.ts
 /test/test/
 /lib
+node_modules
