@@ -12,6 +12,6 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "include": ["index.ts", "module.ts"],
+  "include": ["index.ts", "module.js"],
   "exclude": ["node_modules", "lib"]
 }
