@@ -11,6 +11,6 @@
     "preserveConstEnums": true,
     "baseUrl": "."
   },
-  "include": ["index.ts"],
+  "include": ["index.ts", "module.ts"],
   "exclude": ["node_modules", "lib"]
 }
