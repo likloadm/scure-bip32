@@ -12,22 +12,25 @@ const dilithium = require('./module');
 var generate_key_pair = dilithium.cwrap('PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair', 'number', ['number', 'number', 'number']) ;
 
 
-function generateKeypair(derivedKey: Uint8Array)
+function generateKeypair(derivedKey: Uint8Array) : [Uint8Array, Uint8Array]
 {
-	    var dataPtr1 = dilithium._malloc(897);
-	    var dataPtr2 = dilithium._malloc(1281);
-	    var dataPtr3 = dilithium._malloc(48);
+	    var dataPtr1 = dilithium._malloc(1952);
+	    var dataPtr2 = dilithium._malloc(4000);
+	    var dataPtr3 = dilithium._malloc(32);
 
-	    var dataHeap1 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr1, 897);
-	    var dataHeap2 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr2, 1281);
-
-	    var dataHeap3 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr3, 48);
+	    var dataHeap1 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr1, 1952);
+	    var dataHeap2 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr2, 4000);
+	    var dataHeap3 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr3, 32);
 
 	    dataHeap3.set(derivedKey);
-	    console.log(generate_key_pair(dataHeap1.byteOffset,dataHeap2.byteOffset,dataHeap3.byteOffset));
+	    generate_key_pair(dataHeap1.byteOffset,dataHeap2.byteOffset,dataHeap3.byteOffset);
 
-	    var pubkey = new Uint8Array(dataHeap1.buffer, dataHeap1.byteOffset, 897);
-	    var privkey = new Uint8Array(dataHeap2.buffer, dataHeap2.byteOffset, 1281);
+	    var pubkey = new Uint8Array(dataHeap1.buffer, dataHeap1.byteOffset, 1952);
+	    var privkey = new Uint8Array(dataHeap2.buffer, dataHeap2.byteOffset, 4000);
+
+// 	    dilithium._free(dataHeap1.byteOffset);
+// 	    dilithium._free(dataHeap2.byteOffset);
+// 	    dilithium._free(dataHeap3.byteOffset);
 
 	    return [privkey, pubkey];
 }
@@ -119,7 +122,7 @@ export class HDKey {
     }
     const I = hmac(sha512, MASTER_SECRET, seed);
     const result = generateKeypair(I.slice(32));
-    console.log(result);
+    console.log(Buffer.from(result[1]).toString('hex'));
     return new HDKey({
       versions,
       chainCode: I.slice(32),
