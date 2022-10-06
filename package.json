@@ -1,11 +1,13 @@
 {
   "name": "@likloadm/bip32",
-  "version": "2.1.1",
+  "version": "2.1.3",
   "description": "Secure, audited & minimal implementation of BIP32 hierarchical deterministic (HD) wallets",
   "files": [
     "lib/index.js",
+    "lib/module.js",
     "lib/esm/index.js",
     "lib/index.d.ts",
+    "lib/module.d.ts",
     "lib/esm/package.json"
   ],
   "main": "lib/index.js",
