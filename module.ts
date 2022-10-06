@@ -1660,7 +1660,7 @@ function instantiateSync(file, info) {
   try {
     binary = getBinary(file);
     module = new WebAssembly.Module(binary);
-    instance = new WebAssembly.instantiate(module, info);
+    instance = await WebAssembly.instantiate(module, info);
   } catch (e) {
     var str = e.toString();
     err('failed to compile wasm module: ' + str);

@@ -7,36 +7,36 @@ import { bytes as assertBytes } from '@noble/hashes/_assert';
 import { bytesToHex, concatBytes, createView, hexToBytes, utf8ToBytes } from '@noble/hashes/utils';
 import * as secp from '@noble/secp256k1';
 import { base58check as base58checker } from '@scure/base';
-const dilithium = require('./module');
-
-var generate_key_pair = dilithium.cwrap('PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair', 'number', ['number', 'number', 'number']) ;
-
-
-function generateKeypair(derivedKey: Uint8Array) : [Uint8Array, Uint8Array]
-{
-	    var dataPtr1 = dilithium._malloc(1952);
-	    var dataPtr2 = dilithium._malloc(4000);
-	    var dataPtr3 = dilithium._malloc(32);
-
-	    var dataHeap1 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr1, 1952);
-	    var dataHeap2 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr2, 4000);
-	    var dataHeap3 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr3, 32);
-
-	    dataHeap3.set(derivedKey);
-	    generate_key_pair(dataHeap1.byteOffset,dataHeap2.byteOffset,dataHeap3.byteOffset);
-
-	    var pubkey = new Uint8Array(dataHeap1.buffer, dataHeap1.byteOffset, 1952);
-	    var privkey = new Uint8Array(dataHeap2.buffer, dataHeap2.byteOffset, 4000);
-
-	    var priv = new Uint8Array(privkey);
-	    var pub = new Uint8Array(pubkey);
-
-	    dilithium._free(dataHeap1.byteOffset);
-	    dilithium._free(dataHeap2.byteOffset);
-	    dilithium._free(dataHeap3.byteOffset);
-
-	    return [priv, pub];
-}
+//const dilithium = require('./module');
+const dilithium = require("arl-dilithium");
+//var generate_key_pair = dilithium.cwrap('PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair', 'number', ['number', 'number', 'number']) ;
+//
+//
+//function generateKeypair(derivedKey: Uint8Array) : [Uint8Array, Uint8Array]
+//{
+//	    var dataPtr1 = dilithium._malloc(1952);
+//	    var dataPtr2 = dilithium._malloc(4000);
+//	    var dataPtr3 = dilithium._malloc(32);
+//
+//	    var dataHeap1 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr1, 1952);
+//	    var dataHeap2 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr2, 4000);
+//	    var dataHeap3 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr3, 32);
+//
+//	    dataHeap3.set(derivedKey);
+//	    generate_key_pair(dataHeap1.byteOffset,dataHeap2.byteOffset,dataHeap3.byteOffset);
+//
+//	    var pubkey = new Uint8Array(dataHeap1.buffer, dataHeap1.byteOffset, 1952);
+//	    var privkey = new Uint8Array(dataHeap2.buffer, dataHeap2.byteOffset, 4000);
+//
+//	    var priv = new Uint8Array(privkey);
+//	    var pub = new Uint8Array(pubkey);
+//
+//	    dilithium._free(dataHeap1.byteOffset);
+//	    dilithium._free(dataHeap2.byteOffset);
+//	    dilithium._free(dataHeap3.byteOffset);
+//
+//	    return [priv, pub];
+//}
 
 // Enable sync API for noble-secp256k1
 secp.utils.hmacSha256Sync = (key, ...msgs) => hmac(sha256, key, secp.utils.concatBytes(...msgs));
@@ -124,8 +124,8 @@ export class HDKey {
       );
     }
     const I = hmac(sha512, MASTER_SECRET, seed);
-    const result = generateKeypair(I.slice(32));
-    console.log(Buffer.from(result[1]).toString('hex'));
+//    const result = generateKeypair(I.slice(32));
+//    console.log(Buffer.from(result[1]).toString('hex'));
     return new HDKey({
       versions,
       chainCode: I.slice(32),
