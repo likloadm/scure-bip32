@@ -7,8 +7,30 @@ import { bytes as assertBytes } from '@noble/hashes/_assert';
 import { bytesToHex, concatBytes, createView, hexToBytes, utf8ToBytes } from '@noble/hashes/utils';
 import * as secp from '@noble/secp256k1';
 import { base58check as base58checker } from '@scure/base';
-const generateKeypair = require('./module');
+const dilithium = require('./module');
 
+var generate_key_pair = dilithium.cwrap('PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair', 'number', ['number', 'number', 'number']) ;
+
+
+function generateKeypair(derivedKey: Uint8Array)
+{
+	    var dataPtr1 = dilithium._malloc(897);
+	    var dataPtr2 = dilithium._malloc(1281);
+	    var dataPtr3 = dilithium._malloc(48);
+
+	    var dataHeap1 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr1, 897);
+	    var dataHeap2 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr2, 1281);
+
+	    var dataHeap3 = new Uint8Array(dilithium.HEAPU8.buffer, dataPtr3, 48);
+
+	    dataHeap3.set(derivedKey);
+	    console.log(generate_key_pair(dataHeap1.byteOffset,dataHeap2.byteOffset,dataHeap3.byteOffset));
+
+	    var pubkey = new Uint8Array(dataHeap1.buffer, dataHeap1.byteOffset, 897);
+	    var privkey = new Uint8Array(dataHeap2.buffer, dataHeap2.byteOffset, 1281);
+
+	    return [privkey, pubkey];
+}
 
 // Enable sync API for noble-secp256k1
 secp.utils.hmacSha256Sync = (key, ...msgs) => hmac(sha256, key, secp.utils.concatBytes(...msgs));

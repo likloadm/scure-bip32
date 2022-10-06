@@ -44,7 +44,7 @@
     "build": "tsc -d && tsc -p tsconfig.esm.json",
     "lint": "prettier --check 'index.ts' 'test/*.test.ts'",
     "format": "prettier --write 'index.ts' 'test/*.test.ts'",
-    "test": "cd test/test && tsc && mocha hdkey.test.js"
+    "test": "cd test && tsc && mocha hdkey.test.js"
   },
   "keywords": [
     "bip32",
